@@ -1,5 +1,5 @@
-# SemProject-OnlineBankingPortal
-A semester project that replicates the working of an online banking portal. Developed in C++ using fundamental programming concepts.
+# Semester Project : Online Banking Portal Replica
+A semester project that replicates the working of an online banking portal. Developed in C++ using fundamental programming concepts, and console based user interaction and output.
 
 **Code Components:**
 
