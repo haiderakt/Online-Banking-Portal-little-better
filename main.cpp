@@ -3,8 +3,18 @@
 #include <fstream>
 #include <time.h>
 #include <sys/stat.h>
+#include <cstdlib>
 
 using namespace std;
+
+// ---Password encryption
+string xorEncryptDecrypt(const string& data, char key) {
+    string result = data;
+    for (size_t i = 0; i < result.size(); ++i) {
+        result[i] ^= key; // --- XOR operation
+    }
+    return result;
+}
 
 // --- Function Prototypes:
 void landing_page();
@@ -121,8 +131,10 @@ void register_page() {	// <--- Usage: Takes input from the user to register them
 	mkdir("Records");	// <--- Makes a folder "Records" in parent directory of the .cpp file
 	f.open("Records\\" + username + ".txt", ios::app);	// <--- makes a "username".txt file
 
+     string encryptedPassword = xorEncryptDecrypt(password, 'K'); //---Encrypting the password before saving it
+
 	// Storing data in the file:
-	f << username << endl << password << endl << account_number << endl << account_type << endl << balance << endl << repayment << endl;
+	f << username << endl << encryptedPassword << endl << account_number << endl << account_type << endl << balance << endl << repayment << endl;
 	f << age << endl << contact << endl << cnic << endl << full_name << endl;
 	f.close();
 
@@ -155,6 +167,8 @@ void login_page() {	// <--- Usage: Validates username and password to login a us
 	{
 		while (!f.eof())	// <--- Traversing till the end of file.
 		{
+            string decryptedPassword = xorEncryptDecrypt(inFile_password, 'K');//--Decrypting the password before using
+
 			f >> inFile_username >> inFile_password;	// <--- Storing first 2 lines of the file (username and password).
 
 			if (username == inFile_username && password == inFile_password)	// <--- Executes if the entered username and password match.
