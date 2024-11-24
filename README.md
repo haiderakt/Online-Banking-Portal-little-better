@@ -20,6 +20,7 @@ A semester project that replicates the working of an online banking portal. Deve
     #include <fstream>
     #include <time.h>
     #include <sys/stat.h>
+    #include <cstdlib>
 
 **Programming Fundamental Concepts Used:**
     
